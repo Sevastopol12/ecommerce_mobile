@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_cart"
+            android:icon="@android:drawable/ic_menu_add"
+            android:title="Xem giỏ hàng" />
+        <item
+            android:id="@+id/nav_order_history"
+            android:icon="@android:drawable/ic_menu_recent_history"
+            android:title="Lịch sử các đơn đặt" />
+    </group>
+
+    <item android:title="">
+        <menu>
+            <item
+                android:id="@+id/nav_logout"
+                android:icon="@android:drawable/ic_menu_close_clear_cancel"
+                android:title="Thoát khỏi tài khoản" />
+        </menu>
+    </item>
+
+</menu>
