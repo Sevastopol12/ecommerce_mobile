@@ -17,8 +17,10 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -48,8 +50,9 @@ public class LoginActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
 
         // Cấu hình Google Sign-In
+        // R.string.default_web_client_id được tạo tự động bởi google-services plugin
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))  // Thêm string này từ google-services.json hoặc Firebase Console
+                .requestIdToken(getString(R.string.default_web_client_id)) 
                 .requestEmail()
                 .build();
         googleSignInClient = GoogleSignIn.getClient(this, gso);
@@ -81,7 +84,8 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         finish();
                     } else {
-                        Toast.makeText(this, "Đăng nhập thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        String error = task.getException() != null ? task.getException().getMessage() : "Lỗi không xác định";
+                        Toast.makeText(this, "Đăng nhập thất bại: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
@@ -105,20 +109,29 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, task -> {
                     if (task.isSuccessful()) {
-                        // Lưu thông tin user vào Firestore nếu cần (fullname từ Google)
-                        String userId = mAuth.getCurrentUser().getUid();
-                        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
-                        if (acct != null) {
-                            Map<String, Object> user = new HashMap<>();
-                            user.put("fullname", acct.getDisplayName());
-                            user.put("email", acct.getEmail());
-                            db.collection("users").document(userId).set(user);
+                        FirebaseUser user = mAuth.getCurrentUser();
+                        if (user != null) {
+                            String userId = user.getUid();
+                            String email = user.getEmail();
+                            String displayName = user.getDisplayName();
+
+                            Map<String, Object> userData = new HashMap<>();
+                            userData.put("email", email);
+                            if (displayName != null) {
+                                userData.put("fullname", displayName);
+                            }
+                            
+                            // Sử dụng SetOptions.merge() để không ghi đè dữ liệu nếu đã có
+                            db.collection("users").document(userId)
+                                    .set(userData, SetOptions.merge());
                         }
+
                         Toast.makeText(this, "Đăng nhập Google thành công", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         finish();
                     } else {
-                        Toast.makeText(this, "Auth failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        String error = task.getException() != null ? task.getException().getMessage() : "Auth failed";
+                        Toast.makeText(this, "Authentication failed: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
