@@ -1,4 +1,4 @@
-package lab.week.buchs;
+package lab.week.buchs.ui;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
+import lab.week.buchs.R;
+import lab.week.buchs.books.Book;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 

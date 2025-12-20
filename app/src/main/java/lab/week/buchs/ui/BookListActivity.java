@@ -1,4 +1,4 @@
-package lab.week.buchs;
+package lab.week.buchs.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -18,6 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
+import lab.week.buchs.R;
+import lab.week.buchs.books.Book;
+import lab.week.buchs.database.AppDatabase;
 
 public class BookListActivity extends AppCompatActivity {
 

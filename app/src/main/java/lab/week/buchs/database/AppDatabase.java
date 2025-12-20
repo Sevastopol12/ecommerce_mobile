@@ -1,9 +1,12 @@
-package lab.week.buchs;
+package lab.week.buchs.database;
 
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import android.content.Context;
+
+import lab.week.buchs.books.Book;
+import lab.week.buchs.books.BookDao;
 
 @Database(entities = {Book.class}, version = 1)
 public abstract class AppDatabase extends RoomDatabase {

@@ -1,4 +1,4 @@
-package lab.week.buchs;
+package lab.week.buchs.books;
 
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
