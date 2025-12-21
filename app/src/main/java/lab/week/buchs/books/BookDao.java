@@ -18,4 +18,7 @@ public interface BookDao {
 
     @Query("DELETE FROM books WHERE category = :category")
     void deleteByCategory(String category);
+
+    @Query("DELETE FROM books")
+    void deleteAll();
 }

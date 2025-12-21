@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "240234124534-v1vqirbhng2bufc565tf86gp7b17rrdc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "lab.week.buchs",
+            "certificate_hash": "e9695e7386eb625948e5fdfdd528040da2ccaada"
+          }
+        },
+        {
           "client_id": "240234124534-kdkrunnv0k72p9k379o7cd8enull81ir.apps.googleusercontent.com",
           "client_type": 3
         }
