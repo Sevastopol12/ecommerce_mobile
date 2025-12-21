@@ -41,7 +41,7 @@
                     android:id="@+id/welcome_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Chào mừng bạn"
+                    android:text="Welcome"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/search_view"
                     app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/welcome_text"
-                    app:queryHint="Tìm kiếm sách" />
+                    app:queryHint="Search for books" />
 
                 <ImageView
                     android:id="@+id/banner_image"
@@ -68,14 +68,14 @@
                     android:src="@android:drawable/ic_menu_gallery"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/search_view" />
+                    app:layout_constraintTop_toBottomOf="@id/search_view" />
 
                 <TextView
                     android:id="@+id/category_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Chọn thể loại bạn muốn"
+                    android:text="Choose your desired category"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -87,14 +87,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:columnCount="2"
-                    android:rowCount="4"
+                    android:rowCount="6"
                     android:useDefaultMargins="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/category_title">
 
-                    <!-- Category 1 -->
+                    <!-- Category 1: Education -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category1"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -110,19 +111,19 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Sách Giáo Dục – Học Thuật"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Sách Giáo Dục – Học Thuật"
+                                android:text="Education"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 2 -->
+                    <!-- Category 2: Business -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category2"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -138,19 +139,19 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Văn Học – Giải Trí"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Văn Học – Giải Trí"
+                                android:text="Business"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 3 -->
+                    <!-- Category 3: Self-Help -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category3"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -166,19 +167,19 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Thiếu Nhi"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Thiếu Nhi"
+                                android:text="Self-Help"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 4 -->
+                    <!-- Category 4: Children -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category4"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -194,19 +195,19 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Kinh Doanh – Phát Triển Bản Thân"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Kinh Doanh – Phát Triển Bản Thân"
+                                android:text="Children"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 5 -->
+                    <!-- Category 5: Literature -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category5"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -222,19 +223,19 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Đời Sống – Nghệ Thuật"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Đời Sống – Nghệ Thuật"
+                                android:text="Literature"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 6 -->
+                    <!-- Category 6: Science -->
                     <com.google.android.material.card.MaterialCardView
+                         android:id="@+id/category6"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -250,19 +251,19 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Chính Trị – Pháp Luật – Tôn Giáo"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Chính Trị – Pháp Luật – Tôn Giáo"
+                                android:text="Science"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 7 -->
+                    <!-- Category 7: Politics -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category7"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -278,19 +279,19 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Khoa Học - Công Nghệ"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Khoa Học - Công Nghệ"
+                                android:text="Politics"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 8 -->
+                    <!-- Category 8: History -->
                     <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category8"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_columnWeight="1"
@@ -306,77 +307,110 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Sách Tham Khảo"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Sách Tham Khảo"
+                                android:text="History"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
+                    <!-- Category 9: Technology -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category9"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@android:drawable/ic_menu_agenda" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Technology"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Category 10: Health & Wellness -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@android:drawable/ic_menu_agenda" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Health &amp; Wellness"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Category 11: Arts & Design -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category11"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@android:drawable/ic_menu_agenda" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Arts &amp; Design"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
                 </GridLayout>
-
-                <!-- Contact Us Section -->
-                <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/contact_card"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="24dp"
-                    app:cardCornerRadius="8dp"
-                    app:cardElevation="4dp"
-                    app:layout_constraintTop_toBottomOf="@id/category_grid"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent">
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="16dp">
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Contact Us"
-                            android:textSize="18sp"
-                            android:textStyle="bold"
-                            android:layout_marginBottom="16dp"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Facebook: https://www.facebook.com/bookstore.vn.demo"
-                            android:autoLink="web"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Zalo: 01112222"
-                            android:autoLink="phone"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="8dp"
-                            android:text="Gmail: bookstore123@gmail.com"
-                            android:autoLink="email"/>
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Địa chỉ: 1122 Lạc Long Quân, Quận 101 Thành Phố Hồ Chí Minh"
-                            android:autoLink="map"/>
-                    </LinearLayout>
-                </com.google.android.material.card.MaterialCardView>
-
+                
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/logout_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Đăng xuất"
+                    android:text="Logout"
                     android:backgroundTint="#D32F2F"
                     android:textColor="@android:color/white"
-                    app:layout_constraintTop_toBottomOf="@+id/contact_card"
+                    app:layout_constraintTop_toBottomOf="@id/category_grid"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     android:layout_marginBottom="16dp"/>
@@ -392,6 +426,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
+        app:headerLayout="@layout/nav_header"
         app:menu="@menu/nav_menu" />
 
 </androidx.drawerlayout.widget.DrawerLayout>

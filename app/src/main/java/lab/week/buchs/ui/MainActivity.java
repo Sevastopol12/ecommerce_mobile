@@ -1,4 +1,4 @@
-package lab.week.buchs;
+package lab.week.buchs.ui;
 
 import android.os.Bundle;
 
@@ -12,6 +12,8 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
+
+import lab.week.buchs.R;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;

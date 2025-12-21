@@ -1,9 +1,8 @@
-package lab.week.buchs;
+package lab.week.buchs.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
-import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
@@ -11,6 +10,8 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
+import lab.week.buchs.R;
+import lab.week.buchs.ui.HomeActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText fullnameInput, emailInput, passwordInput, confirmPasswordInput;
