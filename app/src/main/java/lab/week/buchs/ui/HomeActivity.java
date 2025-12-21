@@ -9,6 +9,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.card.MaterialCardView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class HomeActivity extends AppCompatActivity {
 
     private AppDatabase appDb;
     private FirebaseFirestore db;
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
 
         appDb = AppDatabase.getDatabase(this);
         db = FirebaseFirestore.getInstance();
+        mAuth = FirebaseAuth.getInstance();
 
         fetchAllBooksAndCache();
 
@@ -61,6 +64,13 @@ public class HomeActivity extends AppCompatActivity {
         category9.setOnClickListener(v -> openBookList("Technology"));
         category10.setOnClickListener(v -> openBookList("Health & Wellness"));
         category11.setOnClickListener(v -> openBookList("Arts & Design"));
+
+        findViewById(R.id.logout_button).setOnClickListener(v -> {
+            mAuth.signOut();
+            Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     @Override

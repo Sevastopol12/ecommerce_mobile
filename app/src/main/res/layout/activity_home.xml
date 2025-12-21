@@ -41,7 +41,7 @@
                     android:id="@+id/welcome_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Chào mừng bạn"
+                    android:text="Welcome"
                     android:textSize="18sp"
                     app:layout_constraintBottom_toTopOf="@+id/search_view"
                     app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/welcome_text"
-                    app:queryHint="Tìm kiếm sách" />
+                    app:queryHint="Search for books" />
 
                 <ImageView
                     android:id="@+id/banner_image"
@@ -75,7 +75,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
-                    android:text="Chọn thể loại bạn muốn"
+                    android:text="Choose your desired category"
                     android:textSize="18sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:columnCount="2"
-                    android:rowCount="6" 
+                    android:rowCount="6"
                     android:useDefaultMargins="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -372,7 +372,7 @@
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-                    
+
                     <!-- Category 11: Arts & Design -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/category11"
@@ -400,8 +400,20 @@
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
-
                 </GridLayout>
+                
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/logout_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:text="Logout"
+                    android:backgroundTint="#D32F2F"
+                    android:textColor="@android:color/white"
+                    app:layout_constraintTop_toBottomOf="@id/category_grid"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="16dp"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
