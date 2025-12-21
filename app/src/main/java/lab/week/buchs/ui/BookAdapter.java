@@ -3,10 +3,11 @@ package lab.week.buchs.ui;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
+import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.button.MaterialButton;
 import java.util.List;
 import lab.week.buchs.R;
 import lab.week.buchs.books.Book;
@@ -32,15 +33,6 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.bookName.setText(book.getName());
         holder.bookAuthor.setText(book.getAuthor());
         holder.bookPrice.setText(String.format("$%.2f", book.getPrice()));
-        holder.bookDescription.setText(book.getDescription());
-
-        boolean isExpanded = book.isExpanded();
-        holder.expandableLayout.setVisibility(isExpanded ? View.VISIBLE : View.GONE);
-
-        holder.itemView.setOnClickListener(v -> {
-            book.setExpanded(!isExpanded);
-            notifyItemChanged(position);
-        });
     }
 
     @Override
@@ -49,19 +41,19 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
     }
 
     static class BookViewHolder extends RecyclerView.ViewHolder {
+        ImageView bookCover;
         TextView bookName;
         TextView bookAuthor;
         TextView bookPrice;
-        TextView bookDescription;
-        LinearLayout expandableLayout;
+        MaterialButton addToCartButton;
 
         public BookViewHolder(@NonNull View itemView) {
             super(itemView);
+            bookCover = itemView.findViewById(R.id.book_cover);
             bookName = itemView.findViewById(R.id.book_name);
             bookAuthor = itemView.findViewById(R.id.book_author);
             bookPrice = itemView.findViewById(R.id.book_price);
-            bookDescription = itemView.findViewById(R.id.book_description);
-            expandableLayout = itemView.findViewById(R.id.expandable_layout);
+            addToCartButton = itemView.findViewById(R.id.add_to_cart_button);
         }
     }
 }

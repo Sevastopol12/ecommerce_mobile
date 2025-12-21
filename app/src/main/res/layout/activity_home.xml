@@ -68,7 +68,7 @@
                     android:src="@android:drawable/ic_menu_gallery"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/search_view" />
+                    app:layout_constraintTop_toBottomOf="@id/search_view" />
 
                 <TextView
                     android:id="@+id/category_title"
@@ -87,13 +87,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:columnCount="2"
-                    android:rowCount="4"
+                    android:rowCount="6" 
                     android:useDefaultMargins="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/category_title">
 
-                    <!-- Category 1 -->
+                    <!-- Category 1: Education -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/category1"
                         android:layout_width="0dp"
@@ -111,7 +111,6 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Education"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
@@ -122,7 +121,7 @@
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 2 -->
+                    <!-- Category 2: Business -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/category2"
                         android:layout_width="0dp"
@@ -140,18 +139,17 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Literature"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Literature"
+                                android:text="Business"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 3 -->
+                    <!-- Category 3: Self-Help -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/category3"
                         android:layout_width="0dp"
@@ -169,18 +167,17 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Children"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Children"
+                                android:text="Self-Help"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 4 -->
+                    <!-- Category 4: Children -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/category4"
                         android:layout_width="0dp"
@@ -198,18 +195,17 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Business"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Business"
+                                android:text="Children"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 5 -->
+                    <!-- Category 5: Literature -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/category5"
                         android:layout_width="0dp"
@@ -227,18 +223,17 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Arts &amp; Design"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Arts &amp; Design"
+                                android:text="Literature"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 6 -->
+                    <!-- Category 6: Science -->
                     <com.google.android.material.card.MaterialCardView
                          android:id="@+id/category6"
                         android:layout_width="0dp"
@@ -256,18 +251,17 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Politics"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Politics"
+                                android:text="Science"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 7 -->
+                    <!-- Category 7: Politics -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/category7"
                         android:layout_width="0dp"
@@ -285,18 +279,17 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Science"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="8dp"
-                                android:text="Science"
+                                android:text="Politics"
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
 
-                    <!-- Category 8 -->
+                    <!-- Category 8: History -->
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/category8"
                         android:layout_width="0dp"
@@ -314,7 +307,34 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:contentDescription="Technology"
+                                android:src="@android:drawable/ic_menu_agenda" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="History"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Category 9: Technology -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category9"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
                                 android:src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
@@ -324,6 +344,63 @@
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Category 10: Health & Wellness -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@android:drawable/ic_menu_agenda" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Health &amp; Wellness"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+                    
+                    <!-- Category 11: Arts & Design -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category11"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@android:drawable/ic_menu_agenda" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Arts &amp; Design"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
                 </GridLayout>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
