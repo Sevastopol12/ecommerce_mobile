@@ -2,7 +2,12 @@ package lab.week.buchs.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -23,6 +28,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         appDb = AppDatabase.getDatabase(this);
         db = FirebaseFirestore.getInstance();
@@ -53,6 +61,23 @@ public class HomeActivity extends AppCompatActivity {
         category9.setOnClickListener(v -> openBookList("Technology"));
         category10.setOnClickListener(v -> openBookList("Health & Wellness"));
         category11.setOnClickListener(v -> openBookList("Arts & Design"));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == R.id.action_refresh) {
+            Toast.makeText(this, "Refreshing book data...", Toast.LENGTH_SHORT).show();
+            fetchAllBooksAndCache();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void openBookList(String category) {
