@@ -5,9 +5,14 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.widget.NestedScrollView;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -25,6 +30,9 @@ public class HomeActivity extends AppCompatActivity {
     private AppDatabase appDb;
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
+    private RecyclerView searchResultsRecyclerView;
+    private BookAdapter bookAdapter;
+    private NestedScrollView contentScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +47,13 @@ public class HomeActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         fetchAllBooksAndCache();
+
+        contentScrollView = findViewById(R.id.content_scroll_view);
+        searchResultsRecyclerView = findViewById(R.id.search_results_recycler_view);
+        searchResultsRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        SearchView searchView = findViewById(R.id.search_view);
+        setupSearchView(searchView);
 
         // Category navigation
         MaterialCardView category1 = findViewById(R.id.category1);
@@ -71,6 +86,55 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         });
+    }
+
+    private void setupSearchView(SearchView searchView) {
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                searchBooks(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if (newText.isEmpty()) {
+                    showDefaultContent();
+                }
+                return true;
+            }
+        });
+    }
+
+    private void searchBooks(String query) {
+        db.collection("books")
+                .whereGreaterThanOrEqualTo("name", query)
+                .whereLessThanOrEqualTo("name", query + "\uf8ff")
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        List<Book> searchResults = new ArrayList<>();
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            Book book = document.toObject(Book.class);
+                            searchResults.add(book);
+                        }
+                        displaySearchResults(searchResults);
+                    } else {
+                        Toast.makeText(HomeActivity.this, "Error searching for books.", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    private void displaySearchResults(List<Book> books) {
+        bookAdapter = new BookAdapter(books);
+        searchResultsRecyclerView.setAdapter(bookAdapter);
+        searchResultsRecyclerView.setVisibility(View.VISIBLE);
+        contentScrollView.setVisibility(View.GONE);
+    }
+
+    private void showDefaultContent() {
+        searchResultsRecyclerView.setVisibility(View.GONE);
+        contentScrollView.setVisibility(View.VISIBLE);
     }
 
     @Override
