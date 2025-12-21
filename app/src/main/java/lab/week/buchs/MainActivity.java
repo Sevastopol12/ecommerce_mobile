@@ -21,14 +21,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         mAuth = FirebaseAuth.getInstance();
 
-        // Kiểm tra trạng thái đăng nhập
         if (mAuth.getCurrentUser() != null) {
-            // Đã đăng nhập, đi đến Home
+
             startActivity(new Intent(MainActivity.this, HomeActivity.class));
         } else {
-            // Chưa đăng nhập, đi đến Login
+
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         }
-        finish();  // Đóng MainActivity để không quay lại
+        finish();
     }
 }

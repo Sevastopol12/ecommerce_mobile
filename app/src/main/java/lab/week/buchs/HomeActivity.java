@@ -47,10 +47,8 @@ public class HomeActivity extends AppCompatActivity {
         MaterialButton logoutButton = findViewById(R.id.logout_button);
         if (logoutButton != null) {
             logoutButton.setOnClickListener(v -> {
-                // Đăng xuất khỏi Firebase
                 mAuth.signOut();
 
-                // Chuyển về màn hình đăng nhập
                 Intent intent = new Intent(HomeActivity.this, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(intent);

@@ -57,7 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        // Lưu fullname vào Firestore (collection "users")
                         String userId = mAuth.getCurrentUser().getUid();
                         Map<String, Object> user = new HashMap<>();
                         user.put("fullname", fullname);
