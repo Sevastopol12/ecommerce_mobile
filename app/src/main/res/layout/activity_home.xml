@@ -87,7 +87,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:columnCount="2"
-                    android:rowCount="6"
+                    android:rowCount="7"
                     android:useDefaultMargins="true"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -391,7 +391,7 @@
                             <ImageView
                                 android:layout_width="64dp"
                                 android:layout_height="64dp"
-                                android:src="@android:drawable/ic_menu_agenda" />
+                                android.src="@android:drawable/ic_menu_agenda" />
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -400,6 +400,35 @@
                                 android:textAlignment="center" />
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
+
+                    <!-- Category 12: Novel -->
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/category12"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_columnWeight="1"
+                        android:layout_gravity="fill"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="4dp">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+                            <ImageView
+                                android:layout_width="64dp"
+                                android:layout_height="64dp"
+                                android:src="@android:drawable/ic_menu_agenda" />
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:text="Novel"
+                                android:textAlignment="center" />
+                        </LinearLayout>
+                    </com.google.android.material.card.MaterialCardView>
+
                 </GridLayout>
                 
                 <com.google.android.material.button.MaterialButton
