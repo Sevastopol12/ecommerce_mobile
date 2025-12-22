@@ -1,16 +1,19 @@
 package lab.week.buchs.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Toast;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
+import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lab.week.buchs.R;
@@ -22,6 +25,16 @@ public class CartActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth mAuth;
     private Button checkoutButton;
+
+    private final ActivityResultLauncher<Intent> checkoutLauncher = registerForActivityResult(
+        new ActivityResultContracts.StartActivityForResult(),
+        result -> {
+            if (result.getResultCode() == RESULT_OK) {
+                cartItems.clear();
+                cartAdapter.notifyDataSetChanged();
+            }
+        }
+    );
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,14 +54,18 @@ public class CartActivity extends AppCompatActivity {
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
 
-        fetchCartItems();
+        checkoutButton.setOnClickListener(v -> openCheckout());
+    }
 
-        checkoutButton.setOnClickListener(v -> checkout());
+    @Override
+    protected void onResume() {
+        super.onResume();
+        fetchCartItems();
     }
 
     private void fetchCartItems() {
         if (mAuth.getCurrentUser() == null) {
-            Toast.makeText(this, "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please log in!", Toast.LENGTH_SHORT).show();
             finish();
             return;
         }
@@ -59,59 +76,49 @@ public class CartActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         cartItems.clear();
                         for (QueryDocumentSnapshot document : task.getResult()) {
-                            cartItems.add(document.getData());
+                            Map<String, Object> item = document.getData();
+                            item.put("documentId", document.getId()); // Keep track of doc ID
+                            cartItems.add(item);
                         }
                         cartAdapter.notifyDataSetChanged();
                     } else {
-                        Toast.makeText(this, "Lỗi tải giỏ hàng", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Shopping cart loading error!", Toast.LENGTH_SHORT).show();
                     }
                 });
     }
 
-    private void removeFromCart(String bookName) {
+    private void removeFromCart(String documentId) {
         String userId = mAuth.getCurrentUser().getUid();
-        db.collection("users").document(userId).collection("cart").document(bookName)
+        db.collection("users").document(userId).collection("cart").document(documentId)
                 .delete()
                 .addOnSuccessListener(aVoid -> {
-                    Toast.makeText(this, "Đã xóa khỏi giỏ hàng", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Removed from My Cart!", Toast.LENGTH_SHORT).show();
                     fetchCartItems(); // Refresh list
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
     }
 
-    private void checkout() {
+    private void openCheckout() {
         if (cartItems.isEmpty()) {
-            Toast.makeText(this, "Giỏ hàng trống", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Empty cart!", Toast.LENGTH_SHORT).show();
             return;
         }
-        String userId = mAuth.getCurrentUser().getUid();
-        Map<String, Object> order = new HashMap<>();
-        order.put("items", cartItems);
-        order.put("total", calculateTotal());
-        order.put("timestamp", System.currentTimeMillis());
 
-        db.collection("users").document(userId).collection("orders").add(order)
-                .addOnSuccessListener(documentReference -> {
-                    Toast.makeText(this, "Đặt hàng thành công", Toast.LENGTH_SHORT).show();
-                    clearCart();
-                })
-                .addOnFailureListener(e -> Toast.makeText(this, "Lỗi đặt hàng", Toast.LENGTH_SHORT).show());
+        Intent intent = new Intent(this, CheckoutActivity.class);
+        intent.putExtra("cartItems", (Serializable) cartItems);
+        intent.putExtra("totalPrice", calculateTotal());
+        checkoutLauncher.launch(intent);
     }
 
     private double calculateTotal() {
         double total = 0;
         for (Map<String, Object> item : cartItems) {
-            total += (double) item.get("price") * (long) item.get("quantity");
+            Object priceObj = item.get("price");
+            Object quantityObj = item.get("quantity");
+            if (priceObj instanceof Number && quantityObj instanceof Number) {
+                total += ((Number) priceObj).doubleValue() * ((Number) quantityObj).longValue();
+            }
         }
         return total;
-    }
-
-    private void clearCart() {
-        String userId = mAuth.getCurrentUser().getUid();
-        for (Map<String, Object> item : cartItems) {
-            db.collection("users").document(userId).collection("cart").document((String) item.get("bookName")).delete();
-        }
-        cartItems.clear();
-        cartAdapter.notifyDataSetChanged();
     }
 }

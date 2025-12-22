@@ -56,7 +56,7 @@ public class AddToCart extends BottomSheetDialogFragment {
             MaterialButton btnAdd = view.findViewById(R.id.btn_add_to_cart);
 
             tvBookName.setText(name);
-            tvBookPrice.setText(String.format("Giá: $%.2f", price));
+            tvBookPrice.setText(String.format("Price: $%.2f", price));
             updateTotal(price);
 
             btnDecrease.setOnClickListener(v -> {
@@ -81,7 +81,7 @@ public class AddToCart extends BottomSheetDialogFragment {
 
     private void updateTotal(double price) {
         totalPrice = quantity * price;
-        tvTotalPrice.setText(String.format("Tổng: $%.2f", totalPrice));
+        tvTotalPrice.setText(String.format("Total: $%.2f", totalPrice));
     }
 
     private void addToCart(String name, String author, double price) {
@@ -98,12 +98,12 @@ public class AddToCart extends BottomSheetDialogFragment {
             db.collection("users").document(userId).collection("cart").document(name)
                     .set(cartItem)
                     .addOnSuccessListener(aVoid -> {
-                        Toast.makeText(getContext(), "Đã thêm vào My Cart", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Added to My Cart!", Toast.LENGTH_SHORT).show();
                         dismiss();
                     })
-                    .addOnFailureListener(e -> Toast.makeText(getContext(), "Lỗi: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> Toast.makeText(getContext(), "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
         } else {
-            Toast.makeText(getContext(), "Vui lòng đăng nhập", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please log in!", Toast.LENGTH_SHORT).show();
         }
     }
 }

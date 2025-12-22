@@ -90,7 +90,7 @@ public class HomeActivity extends AppCompatActivity {
                             if (email != null) navSubtitle.setText(email);
                         }
                     })
-                    .addOnFailureListener(e -> Toast.makeText(this, "Lỗi tải thông tin user", Toast.LENGTH_SHORT).show());
+                    .addOnFailureListener(e -> Toast.makeText(this, "Error loading user information!", Toast.LENGTH_SHORT).show());
         }
 
         fetchAllBooksAndCache();
