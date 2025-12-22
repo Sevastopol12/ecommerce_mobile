@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.button.MaterialButton;
 import java.util.List;
@@ -33,6 +34,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.bookName.setText(book.getName());
         holder.bookAuthor.setText(book.getAuthor());
         holder.bookPrice.setText(String.format("$%.2f", book.getPrice()));
+        holder.addToCartButton.setOnClickListener(v -> {
+            AddToCart bottomSheet = AddToCart.newInstance(book);
+            bottomSheet.show(((AppCompatActivity) holder.itemView.getContext()).getSupportFragmentManager(), "AddToCart");
+        });
     }
 
     @Override

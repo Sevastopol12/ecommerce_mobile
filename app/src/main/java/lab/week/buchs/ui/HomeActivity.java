@@ -6,9 +6,13 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -33,6 +37,27 @@ public class HomeActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                // Already home
+            } else if (id == R.id.nav_my_cart) {
+                startActivity(new Intent(HomeActivity.this, CartActivity.class));
+            } else if (id == R.id.nav_gallery) {
+                Toast.makeText(this, "Gallery", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.nav_slideshow) {
+                Toast.makeText(this, "Slideshow", Toast.LENGTH_SHORT).show();
+            }
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        });
 
         appDb = AppDatabase.getDatabase(this);
         db = FirebaseFirestore.getInstance();
