@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c2d951b174f75645c6dcd2800ccaf0d9",
+    "identityHash": "5f70afd6a41448c260198d46e5df01ca",
     "entities": [
       {
         "tableName": "books",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `category` TEXT, `description` TEXT, `author` TEXT, `price` REAL NOT NULL, PRIMARY KEY(`name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`name` TEXT NOT NULL, `category` TEXT, `description` TEXT, `author` TEXT, `price` REAL NOT NULL, `coverUrl` TEXT, PRIMARY KEY(`name`))",
         "fields": [
           {
             "fieldPath": "name",
@@ -37,6 +37,12 @@
             "columnName": "price",
             "affinity": "REAL",
             "notNull": true
+          },
+          {
+            "fieldPath": "coverUrl",
+            "columnName": "coverUrl",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -52,7 +58,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c2d951b174f75645c6dcd2800ccaf0d9')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '5f70afd6a41448c260198d46e5df01ca')"
     ]
   }
 }
