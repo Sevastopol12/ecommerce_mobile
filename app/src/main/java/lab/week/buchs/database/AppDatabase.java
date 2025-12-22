@@ -8,7 +8,7 @@ import android.content.Context;
 import lab.week.buchs.books.Book;
 import lab.week.buchs.books.BookDao;
 
-@Database(entities = {Book.class}, version = 2)
+@Database(entities = {Book.class}, version = 3)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract BookDao bookDao();
 
