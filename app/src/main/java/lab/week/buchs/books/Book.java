@@ -14,6 +14,7 @@ public class Book {
     private String description;
     private String author;
     private double price;
+    private String coverUrl;
     @Ignore
     private boolean isExpanded;
 
@@ -21,12 +22,13 @@ public class Book {
         // Needed for Firestore
     }
 
-    public Book(String name, String category, String description, String author, double price) {
+    public Book(String name, String category, String description, String author, double price, String coverUrl) {
         this.name = name;
         this.category = category;
         this.description = description;
         this.author = author;
         this.price = price;
+        this.coverUrl = coverUrl;
         this.isExpanded = false;
     }
 
@@ -68,6 +70,14 @@ public class Book {
 
     public void setPrice(double price) {
         this.price = price;
+    }
+
+    public String getCoverUrl() {
+        return coverUrl;
+    }
+
+    public void setCoverUrl(String coverUrl) {
+        this.coverUrl = coverUrl;
     }
 
     public boolean isExpanded() {

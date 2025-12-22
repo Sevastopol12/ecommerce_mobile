@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import java.util.List;
 import lab.week.buchs.R;
@@ -34,6 +35,21 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         holder.bookName.setText(book.getName());
         holder.bookAuthor.setText(book.getAuthor());
         holder.bookPrice.setText(String.format("$%.2f", book.getPrice()));
+        holder.bookDescription.setText(book.getDescription());
+
+        Glide.with(holder.itemView.getContext())
+                .load(book.getCoverUrl())
+                .placeholder(R.drawable.ic_book) // optional placeholder
+                .error(R.drawable.ic_book) // optional error image
+                .into(holder.bookCover);
+
+        holder.bookDescription.setVisibility(book.isExpanded() ? View.VISIBLE : View.GONE);
+
+        holder.itemView.setOnClickListener(v -> {
+            boolean isExpanded = book.isExpanded();
+            holder.bookDescription.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
+            book.setExpanded(!isExpanded);
+        });
         holder.addToCartButton.setOnClickListener(v -> {
             AddToCart bottomSheet = AddToCart.newInstance(book);
             bottomSheet.show(((AppCompatActivity) holder.itemView.getContext()).getSupportFragmentManager(), "AddToCart");
@@ -50,6 +66,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
         TextView bookName;
         TextView bookAuthor;
         TextView bookPrice;
+        TextView bookDescription;
         MaterialButton addToCartButton;
 
         public BookViewHolder(@NonNull View itemView) {
@@ -58,6 +75,7 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             bookName = itemView.findViewById(R.id.book_name);
             bookAuthor = itemView.findViewById(R.id.book_author);
             bookPrice = itemView.findViewById(R.id.book_price);
+            bookDescription = itemView.findViewById(R.id.book_description);
             addToCartButton = itemView.findViewById(R.id.add_to_cart_button);
         }
     }

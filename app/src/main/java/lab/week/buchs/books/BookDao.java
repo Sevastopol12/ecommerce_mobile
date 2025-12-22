@@ -16,8 +16,8 @@ public interface BookDao {
     @Query("SELECT * FROM books WHERE category = :category")
     LiveData<List<Book>> getBooksByCategory(String category);
 
-    @Query("DELETE FROM books WHERE category = :category")
-    void deleteByCategory(String category);
+    @Query("SELECT * FROM books")
+    List<Book> getAllBooks();
 
     @Query("DELETE FROM books")
     void deleteAll();
