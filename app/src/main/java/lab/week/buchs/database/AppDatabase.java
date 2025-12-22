@@ -8,7 +8,7 @@ import android.content.Context;
 import lab.week.buchs.books.Book;
 import lab.week.buchs.books.BookDao;
 
-@Database(entities = {Book.class}, version = 1)
+@Database(entities = {Book.class}, version = 2)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract BookDao bookDao();
 
@@ -20,6 +20,7 @@ public abstract class AppDatabase extends RoomDatabase {
                 if (INSTANCE == null) {
                     INSTANCE = Room.databaseBuilder(context.getApplicationContext(),
                             AppDatabase.class, "book_database")
+                            .fallbackToDestructiveMigration()
                             .build();
                 }
             }

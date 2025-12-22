@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
+
 import lab.week.buchs.R;
 import lab.week.buchs.books.Book;
 import lab.week.buchs.database.AppDatabase;
@@ -67,6 +69,7 @@ public class HomeActivity extends AppCompatActivity {
         MaterialCardView category9 = findViewById(R.id.category9);
         MaterialCardView category10 = findViewById(R.id.category10);
         MaterialCardView category11 = findViewById(R.id.category11);
+        MaterialCardView category12 = findViewById(R.id.category12);
 
         category1.setOnClickListener(v -> openBookList("Education"));
         category2.setOnClickListener(v -> openBookList("Business"));
@@ -79,6 +82,7 @@ public class HomeActivity extends AppCompatActivity {
         category9.setOnClickListener(v -> openBookList("Technology"));
         category10.setOnClickListener(v -> openBookList("Health & Wellness"));
         category11.setOnClickListener(v -> openBookList("Arts & Design"));
+        category12.setOnClickListener(v -> openBookList("Novel"));
 
         findViewById(R.id.logout_button).setOnClickListener(v -> {
             mAuth.signOut();
@@ -100,6 +104,8 @@ public class HomeActivity extends AppCompatActivity {
             public boolean onQueryTextChange(String newText) {
                 if (newText.isEmpty()) {
                     showDefaultContent();
+                } else {
+                    searchBooks(newText);
                 }
                 return true;
             }
@@ -107,22 +113,17 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     private void searchBooks(String query) {
-        db.collection("books")
-                .whereGreaterThanOrEqualTo("name", query)
-                .whereLessThanOrEqualTo("name", query + "\uf8ff")
-                .get()
-                .addOnCompleteListener(task -> {
-                    if (task.isSuccessful()) {
-                        List<Book> searchResults = new ArrayList<>();
-                        for (QueryDocumentSnapshot document : task.getResult()) {
-                            Book book = document.toObject(Book.class);
-                            searchResults.add(book);
-                        }
-                        displaySearchResults(searchResults);
-                    } else {
-                        Toast.makeText(HomeActivity.this, "Error searching for books.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            List<Book> allBooks = appDb.bookDao().getAllBooks();
+            String lowerCaseQuery = query.toLowerCase();
+            List<Book> searchResults = allBooks.stream()
+                    .filter(book -> book.getName().toLowerCase().contains(lowerCaseQuery) ||
+                                   book.getAuthor().toLowerCase().contains(lowerCaseQuery))
+                    .collect(Collectors.toList());
+            
+            runOnUiThread(() -> displaySearchResults(searchResults));
+        });
     }
 
     private void displaySearchResults(List<Book> books) {
@@ -168,6 +169,8 @@ public class HomeActivity extends AppCompatActivity {
                         List<Book> fetchedBooks = new ArrayList<>();
                         for (QueryDocumentSnapshot document : task.getResult()) {
                             Book book = document.toObject(Book.class);
+                            String coverUrl = document.getString("book_cover");
+                            book.setCoverUrl(coverUrl);
                             fetchedBooks.add(book);
                         }
                         cacheBooks(fetchedBooks);
