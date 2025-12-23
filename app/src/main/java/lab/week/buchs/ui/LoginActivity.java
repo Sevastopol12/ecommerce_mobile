@@ -38,19 +38,19 @@ public class LoginActivity extends AppCompatActivity {
         String password = passwordInput.getText().toString().trim();
 
         if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password)) {
-            Toast.makeText(this, "Vui lòng điền đầy đủ thông tin", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Please fill in all the information.", Toast.LENGTH_SHORT).show();
             return;
         }
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        Toast.makeText(this, "Đăng nhập thành công", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Login successfully", Toast.LENGTH_SHORT).show();
                         startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         finish();
                     } else {
-                        String error = task.getException() != null ? task.getException().getMessage() : "Lỗi không xác định";
-                        Toast.makeText(this, "Đăng nhập thất bại: " + error, Toast.LENGTH_SHORT).show();
+                        String error = task.getException() != null ? task.getException().getMessage() : "Unknown error";
+                        Toast.makeText(this, "Login failed: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
     }

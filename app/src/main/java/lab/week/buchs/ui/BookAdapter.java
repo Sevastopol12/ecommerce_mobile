@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
@@ -48,6 +49,10 @@ public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder
             boolean isExpanded = book.isExpanded();
             holder.bookDescription.setVisibility(isExpanded ? View.GONE : View.VISIBLE);
             book.setExpanded(!isExpanded);
+        });
+        holder.addToCartButton.setOnClickListener(v -> {
+            AddToCart bottomSheet = AddToCart.newInstance(book);
+            bottomSheet.show(((AppCompatActivity) holder.itemView.getContext()).getSupportFragmentManager(), "AddToCart");
         });
     }
 

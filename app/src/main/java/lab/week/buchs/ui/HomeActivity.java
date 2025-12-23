@@ -6,14 +6,19 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.core.widget.NestedScrollView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -44,9 +49,47 @@ public class HomeActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(item -> {
+            int id = item.getItemId();
+            if (id == R.id.nav_home) {
+                // Already home
+            } else if (id == R.id.nav_my_cart) {
+                startActivity(new Intent(HomeActivity.this, CartActivity.class));
+            } else if (id == R.id.nav_history) {
+                startActivity(new Intent(HomeActivity.this, HistoryActivity.class));
+            }
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
+        });
+
         appDb = AppDatabase.getDatabase(this);
         db = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
+
+        if (mAuth.getCurrentUser() != null) {
+            String userId = mAuth.getCurrentUser().getUid();
+            db.collection("users").document(userId).get()
+                    .addOnSuccessListener(documentSnapshot -> {
+                        if (documentSnapshot.exists()) {
+                            String fullname = documentSnapshot.getString("fullname");
+                            String email = documentSnapshot.getString("email");
+
+                            View headerView = navigationView.getHeaderView(0);
+                            TextView navTitle = headerView.findViewById(R.id.nav_header_title);
+                            TextView navSubtitle = headerView.findViewById(R.id.nav_header_subtitle);
+
+                            if (fullname != null) navTitle.setText(fullname);
+                            if (email != null) navSubtitle.setText(email);
+                        }
+                    })
+                    .addOnFailureListener(e -> Toast.makeText(this, "Error loading user information!", Toast.LENGTH_SHORT).show());
+        }
 
         fetchAllBooksAndCache();
 
@@ -121,7 +164,7 @@ public class HomeActivity extends AppCompatActivity {
                     .filter(book -> book.getName().toLowerCase().contains(lowerCaseQuery) ||
                                    book.getAuthor().toLowerCase().contains(lowerCaseQuery))
                     .collect(Collectors.toList());
-            
+
             runOnUiThread(() -> displaySearchResults(searchResults));
         });
     }
