@@ -7,10 +7,13 @@ import android.content.Context;
 
 import lab.week.buchs.books.Book;
 import lab.week.buchs.books.BookDao;
+import lab.week.buchs.local_data.Order;
+import lab.week.buchs.local_data.OrderDao;
 
-@Database(entities = {Book.class}, version = 3)
+@Database(entities = {Book.class, Order.class}, version = 6)
 public abstract class AppDatabase extends RoomDatabase {
     public abstract BookDao bookDao();
+    public abstract OrderDao orderDao();
 
     private static volatile AppDatabase INSTANCE;
 

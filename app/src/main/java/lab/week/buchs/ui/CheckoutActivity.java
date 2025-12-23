@@ -13,6 +13,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.WriteBatch;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -68,6 +69,8 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 
     private void confirmOrder() {
+        confirmOrderButton.setEnabled(false);
+
         String name = recipientName.getText().toString().trim();
         String emailAddress = email.getText().toString().trim();
         String shippingAddress = address.getText().toString().trim();
@@ -75,32 +78,61 @@ public class CheckoutActivity extends AppCompatActivity {
 
         if (TextUtils.isEmpty(name) || TextUtils.isEmpty(emailAddress) || TextUtils.isEmpty(shippingAddress) || TextUtils.isEmpty(phone)) {
             Toast.makeText(this, "Please fill in all the information.", Toast.LENGTH_SHORT).show();
+            confirmOrderButton.setEnabled(true);
             return;
         }
 
         if (cartItems == null || cartItems.isEmpty()) {
             Toast.makeText(this, "There are no products available to order.", Toast.LENGTH_SHORT).show();
+            confirmOrderButton.setEnabled(true);
             return;
         }
 
         String userId = mAuth.getCurrentUser().getUid();
-        Map<String, Object> order = new HashMap<>();
-        order.put("recipientName", name);
-        order.put("email", emailAddress);
-        order.put("address", shippingAddress);
-        order.put("phoneNumber", phone);
-        order.put("status", "Pending");
-        order.put("timestamp", System.currentTimeMillis());
-        order.put("items", cartItems);
-        order.put("total", totalPrice);
 
-        db.collection("users").document(userId).collection("orders")
-                .add(order)
-                .addOnSuccessListener(documentReference -> {
+        List<Map<String, Object>> products = new ArrayList<>();
+        for (Map<String, Object> item : cartItems) {
+            Map<String, Object> product = new HashMap<>();
+            product.put("book_name", item.get("bookName"));
+            product.put("quantity", item.get("quantity"));
+
+            double price = 0.0;
+            if (item.get("price") instanceof Number) {
+                price = ((Number) item.get("price")).doubleValue();
+            }
+
+            long quantity = 0;
+            if (item.get("quantity") instanceof Number) {
+                quantity = ((Number) item.get("quantity")).longValue();
+            }
+            product.put("total_price", price * quantity);
+            products.add(product);
+        }
+
+        long timestamp = System.currentTimeMillis();
+        String orderId = String.valueOf(timestamp);
+
+        Map<String, Object> order = new HashMap<>();
+        order.put("ID", orderId);
+        order.put("userId", userId);
+        order.put("customer_name", name);
+        order.put("address", shippingAddress);
+        order.put("phone", phone);
+        order.put("email", emailAddress);
+        order.put("products", products);
+        order.put("total_price", totalPrice);
+        order.put("status", "Pending");
+        order.put("timestamp", timestamp);
+
+        db.collection("order_list").document(orderId).set(order)
+                .addOnSuccessListener(aVoid -> {
                     Toast.makeText(this, "Order successfully!", Toast.LENGTH_SHORT).show();
                     clearCartAndFinish();
                 })
-                .addOnFailureListener(e -> Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                .addOnFailureListener(e -> {
+                    Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                    confirmOrderButton.setEnabled(true);
+                });
     }
 
     private void clearCartAndFinish() {

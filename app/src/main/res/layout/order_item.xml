@@ -6,37 +6,54 @@
     android:layout_margin="8dp"
     app:cardElevation="4dp">
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:padding="16dp">
 
         <TextView
             android:id="@+id/order_id"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:textStyle="bold"
-            android:text="Order ID: #12345" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app.layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/order_date"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Date: 2024-05-20" />
-
-        <TextView
-            android:id="@+id/order_total"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Total: $100.00" />
+            app:layout_constraintTop_toBottomOf="@+id/order_id"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <TextView
             android:id="@+id/order_status"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Status: Pending" />
+            app:layout_constraintTop_toBottomOf="@+id/order_date"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/order_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@+id/order_status"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/products_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@+id/order_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>
