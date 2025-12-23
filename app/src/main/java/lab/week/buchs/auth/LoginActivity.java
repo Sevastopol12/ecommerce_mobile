@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import lab.week.buchs.R;
-import lab.week.buchs.ui.HomeActivity;
-import lab.week.buchs.ui.RegisterActivity;
+import lab.week.buchs.home.HomeActivity;
+import lab.week.buchs.auth.RegisterActivity;
 
 public class LoginActivity extends AppCompatActivity {
     private TextInputEditText emailInput, passwordInput;

@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.cart;
 
 import android.view.LayoutInflater;
 import android.view.View;

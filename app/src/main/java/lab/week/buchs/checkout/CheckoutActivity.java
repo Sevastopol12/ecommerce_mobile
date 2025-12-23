@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.checkout;
 
 import android.os.Bundle;
 import android.text.TextUtils;

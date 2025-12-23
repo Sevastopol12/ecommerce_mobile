@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.history;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;

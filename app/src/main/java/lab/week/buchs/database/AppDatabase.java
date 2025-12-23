@@ -5,8 +5,8 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import android.content.Context;
 
-import lab.week.buchs.books.Book;
-import lab.week.buchs.books.BookDao;
+import lab.week.buchs.book.Book;
+import lab.week.buchs.book.BookDao;
 import lab.week.buchs.local_data.Order;
 import lab.week.buchs.local_data.OrderDao;
 
