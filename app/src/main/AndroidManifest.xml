@@ -13,15 +13,15 @@
         android:theme="@style/Theme.Buchs"
         tools:targetApi="31">
         <activity
-            android:name=".ui.HomeActivity"
+            android:name=".home.HomeActivity"
             android:exported="false">
         </activity>
-        <activity android:name=".ui.BookListActivity" />
-        <activity android:name=".ui.CartActivity" />
-        <activity android:name=".ui.CheckoutActivity" />
-        <activity android:name=".ui.HistoryActivity" />
+        <activity android:name=".book.BookListActivity" />
+        <activity android:name=".cart.CartActivity" />
+        <activity android:name=".checkout.CheckoutActivity" />
+        <activity android:name=".history.HistoryActivity" />
         <activity 
-            android:name=".ui.LoginActivity" 
+            android:name=".auth.LoginActivity" 
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -29,8 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.RegisterActivity" />
-        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".auth.RegisterActivity" />
 
     </application>
 

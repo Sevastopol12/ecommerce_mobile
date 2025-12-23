@@ -1,4 +1,4 @@
-package lab.week.buchs.books;
+package lab.week.buchs.book;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;

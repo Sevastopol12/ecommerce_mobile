@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.book;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.material.button.MaterialButton;
 import java.util.List;
 import lab.week.buchs.R;
-import lab.week.buchs.books.Book;
+import lab.week.buchs.cart.AddToCart;
 
 public class BookAdapter extends RecyclerView.Adapter<BookAdapter.BookViewHolder> {
 

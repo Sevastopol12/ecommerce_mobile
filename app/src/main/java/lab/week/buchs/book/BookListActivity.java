@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.book;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import lab.week.buchs.R;
-import lab.week.buchs.books.Book;
 import lab.week.buchs.database.AppDatabase;
 
 public class BookListActivity extends AppCompatActivity {

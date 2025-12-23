@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.home;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -29,8 +29,13 @@ import java.util.concurrent.Executors;
 import java.util.stream.Collectors;
 
 import lab.week.buchs.R;
-import lab.week.buchs.books.Book;
+import lab.week.buchs.auth.LoginActivity;
+import lab.week.buchs.book.BookAdapter;
+import lab.week.buchs.book.BookListActivity;
+import lab.week.buchs.book.Book;
+import lab.week.buchs.cart.CartActivity;
 import lab.week.buchs.database.AppDatabase;
+import lab.week.buchs.history.HistoryActivity;
 
 public class HomeActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.cart;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,7 +18,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import lab.week.buchs.R;
-import lab.week.buchs.books.Book;
+import lab.week.buchs.book.Book;
 
 public class AddToCart extends BottomSheetDialogFragment {
 

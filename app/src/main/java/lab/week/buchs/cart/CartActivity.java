@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.cart;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import lab.week.buchs.R;
+import lab.week.buchs.checkout.CheckoutActivity;
 
 public class CartActivity extends AppCompatActivity {
     private RecyclerView cartRecyclerView;

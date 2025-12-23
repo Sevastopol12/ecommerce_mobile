@@ -1,4 +1,4 @@
-package lab.week.buchs.ui;
+package lab.week.buchs.auth;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,7 +12,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 import lab.week.buchs.R;
-import lab.week.buchs.ui.HomeActivity;
 
 public class RegisterActivity extends AppCompatActivity {
     private TextInputEditText fullnameInput, emailInput, passwordInput, confirmPasswordInput;
