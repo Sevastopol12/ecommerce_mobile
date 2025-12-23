@@ -7,6 +7,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,6 +51,11 @@ public class RegisterActivity extends AppCompatActivity {
             return;
         }
 
+        if (password.length() < 6) {
+            Toast.makeText(this, "Mật khẩu phải có ít nhất 6 ký tự", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (!password.equals(confirmPassword)) {
             Toast.makeText(this, "Mật khẩu xác nhận không khớp", Toast.LENGTH_SHORT).show();
             return;
@@ -58,20 +64,26 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(task -> {
                     if (task.isSuccessful()) {
-                        String userId = mAuth.getCurrentUser().getUid();
-                        Map<String, Object> user = new HashMap<>();
-                        user.put("fullname", fullname);
-                        user.put("email", email);
+                        FirebaseUser firebaseUser = mAuth.getCurrentUser();
+                        if (firebaseUser != null) {
+                            String userId = firebaseUser.getUid();
+                            Map<String, Object> user = new HashMap<>();
+                            user.put("fullname", fullname);
+                            user.put("email", email);
 
-                        db.collection("users").document(userId).set(user)
-                                .addOnSuccessListener(aVoid -> {
-                                    Toast.makeText(this, "Đăng ký thành công", Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(RegisterActivity.this, HomeActivity.class));
-                                    finish();
-                                })
-                                .addOnFailureListener(e -> Toast.makeText(this, "Lỗi lưu dữ liệu: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                            db.collection("users").document(userId).set(user)
+                                    .addOnSuccessListener(aVoid -> {
+                                        Toast.makeText(this, "Đăng ký thành công. Vui lòng đăng nhập.", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
+                                        startActivity(intent);
+                                        finish();
+                                    })
+                                    .addOnFailureListener(e -> Toast.makeText(this, "Lỗi lưu dữ liệu: " + e.getMessage(), Toast.LENGTH_SHORT).show());
+                        }
                     } else {
-                        Toast.makeText(this, "Đăng ký thất bại: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        String error = task.getException() != null ? task.getException().getMessage() : "Lỗi không xác định";
+                        Toast.makeText(this, "Đăng ký thất bại: " + error, Toast.LENGTH_SHORT).show();
                     }
                 });
     }
