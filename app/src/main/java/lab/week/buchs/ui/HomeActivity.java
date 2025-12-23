@@ -61,10 +61,8 @@ public class HomeActivity extends AppCompatActivity {
                 // Already home
             } else if (id == R.id.nav_my_cart) {
                 startActivity(new Intent(HomeActivity.this, CartActivity.class));
-            } else if (id == R.id.nav_gallery) {
-                Toast.makeText(this, "Gallery", Toast.LENGTH_SHORT).show();
-            } else if (id == R.id.nav_slideshow) {
-                Toast.makeText(this, "Slideshow", Toast.LENGTH_SHORT).show();
+            } else if (id == R.id.nav_history) {
+                startActivity(new Intent(HomeActivity.this, HistoryActivity.class));
             }
             drawer.closeDrawer(GravityCompat.START);
             return true;

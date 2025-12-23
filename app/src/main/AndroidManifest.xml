@@ -24,6 +24,7 @@
         <activity android:name=".ui.BookListActivity" />
         <activity android:name=".ui.CartActivity" />
         <activity android:name=".ui.CheckoutActivity" />
+        <activity android:name=".ui.HistoryActivity" />
         <activity android:name=".ui.LoginActivity" />
         <activity android:name=".ui.RegisterActivity" />
         <activity android:name=".ui.MainActivity"/>
