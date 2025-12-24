@@ -2,4 +2,5 @@
     <string name="app_name">buchs</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="default_web_client_id">YOUR_WEB_CLIENT_ID</string>
 </resources>
