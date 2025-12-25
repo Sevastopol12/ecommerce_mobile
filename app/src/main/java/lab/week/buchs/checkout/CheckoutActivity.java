@@ -30,6 +30,7 @@ public class CheckoutActivity extends AppCompatActivity {
     private List<Map<String, Object>> cartItems;
     private double totalPrice;
 
+    @SuppressWarnings({"deprecation", "unchecked"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,7 +48,13 @@ public class CheckoutActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         // Get data from Intent
-        cartItems = (List<Map<String, Object>>) getIntent().getSerializableExtra("cartItems");
+        Serializable cartItemsSerializable = getIntent().getSerializableExtra("cartItems");
+        if (cartItemsSerializable instanceof List) {
+            cartItems = (List<Map<String, Object>>) cartItemsSerializable;
+        } else {
+            cartItems = new ArrayList<>();
+        }
+
         totalPrice = getIntent().getDoubleExtra("totalPrice", 0.0);
 
         totalPriceTextView.setText(String.format("Total amount: $%.2f", totalPrice));

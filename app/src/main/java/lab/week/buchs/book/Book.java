@@ -22,6 +22,7 @@ public class Book {
         // Needed for Firestore
     }
 
+    @Ignore
     public Book(String name, String category, String description, String author, double price, String coverUrl) {
         this.name = name;
         this.category = category;
